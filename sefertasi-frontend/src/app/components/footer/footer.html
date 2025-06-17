@@ -1,0 +1,107 @@
+<!-- footer.component.html -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Şirket Bilgileri -->
+        <div class="footer-section">
+          <h3 class="footer-title">{{ companyInfo.name }}</h3>
+          <p class="footer-description">
+            En kaliteli ürünleri en uygun fiyatlarla sunuyoruz. 
+            Müşteri memnuniyeti bizim önceliğimizdir.
+          </p>
+          <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> {{ companyInfo.address }}</p>
+            <p><i class="fas fa-phone"></i> {{ companyInfo.phone }}</p>
+            <p><i class="fas fa-envelope"></i> {{ companyInfo.email }}</p>
+          </div>
+        </div>
+
+        <!-- Kategoriler -->
+        <div class="footer-section">
+          <h3 class="footer-title">Kategoriler</h3>
+          <ul class="footer-links">
+            <li *ngFor="let category of categories">
+              <a [routerLink]="['/category', category]">{{ category }}</a>
+            </li>
+            <li *ngIf="categories.length > 0">
+              <a routerLink="/categories" class="view-all">Tümünü Gör →</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Hızlı Linkler -->
+        <div class="footer-section">
+          <h3 class="footer-title">Kurumsal</h3>
+          <ul class="footer-links">
+            <li *ngFor="let link of quickLinks">
+              <a [routerLink]="link.link">{{ link.name }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Müşteri Hizmetleri -->
+        <div class="footer-section">
+          <h3 class="footer-title">Müşteri Hizmetleri</h3>
+          <ul class="footer-links">
+            <li *ngFor="let service of customerService">
+              <a [routerLink]="service.link">{{ service.name }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-section">
+          <h3 class="footer-title">Bültenimize Katılın</h3>
+          <p class="newsletter-text">
+            Yeni ürünler ve kampanyalardan haberdar olun!
+          </p>
+          <form class="newsletter-form" (submit)="subscribeNewsletter($event)">
+            <input 
+              type="email" 
+              placeholder="E-posta adresiniz" 
+              required
+              class="newsletter-input"
+            >
+            <button type="submit" class="newsletter-button">
+              Abone Ol
+            </button>
+          </form>
+          
+          <!-- Sosyal Medya -->
+          <div class="social-links">
+            <h4>Bizi Takip Edin</h4>
+            <div class="social-icons">
+              <a 
+                *ngFor="let social of socialLinks" 
+                [href]="social.link" 
+                target="_blank"
+                rel="noopener noreferrer"
+                [title]="social.name"
+                class="social-icon"
+              >
+                <i [class]="social.icon"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-content">
+        <p class="copyright">
+          &copy; {{ currentYear }} {{ companyInfo.name }}. Tüm hakları saklıdır.
+        </p>
+        <div class="footer-bottom-links">
+          <a routerLink="/privacy">Gizlilik Politikası</a>
+          <a routerLink="/terms">Kullanım Koşulları</a>
+          <a routerLink="/cookies">Çerez Politikası</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

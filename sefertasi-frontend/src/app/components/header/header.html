@@ -1,0 +1,129 @@
+<!-- header.component.html -->
+<header [class.scrolled]="isScrolled" class="header">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-content">
+        <div class="contact-info">
+          <span><i class="fas fa-phone"></i> +90 212 123 45 67</span>
+          <span><i class="fas fa-envelope"></i> info@eticaret.com</span>
+        </div>
+        <div class="top-bar-right">
+          <a routerLink="/contact" class="top-link">
+            <i class="fas fa-info-circle"></i> İletişim
+          </a>
+          <a routerLink="/admin" class="top-link admin-link">
+            <i class="fas fa-user-shield"></i> Admin Panel
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <div class="main-header">
+    <div class="container">
+      <div class="header-content">
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Logo -->
+        <a routerLink="/" class="logo">
+          <span class="logo-text">E-TICARET</span>
+        </a>
+
+        <!-- Search Bar (Desktop) -->
+        <div class="search-container desktop-only">
+          <form (ngSubmit)="onSearch()" class="search-form">
+            <input
+              type="text"
+              [(ngModel)]="searchQuery"
+              name="search"
+              placeholder="Ürün ara..."
+              class="search-input"
+            >
+            <button type="button" *ngIf="searchQuery" (click)="clearSearch()" class="clear-search">
+              <i class="fas fa-times"></i>
+            </button>
+            <button type="submit" class="search-button">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <!-- Mobile Search Toggle -->
+          <button class="icon-button mobile-only" (click)="toggleSearch()">
+            <i class="fas fa-search"></i>
+          </button>
+
+          <!-- User Actions -->
+          <a routerLink="/catalog" class="action-button">
+            <i class="fas fa-th-large"></i>
+            <span class="action-text desktop-only">Katalog</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile Search (Expandable) -->
+      <div class="mobile-search" [class.expanded]="isSearchExpanded">
+        <form (ngSubmit)="onSearch()" class="search-form">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            name="mobileSearch"
+            placeholder="Ürün ara..."
+            class="search-input"
+          >
+          <button type="submit" class="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navigation" [class.mobile-open]="isMobileMenuOpen">
+    <div class="container">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a 
+            routerLink="/" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}"
+            (click)="isMobileMenuOpen = false"
+          >
+            Ana Sayfa
+          </a>
+        </li>
+        <li class="nav-item" *ngFor="let category of categories">
+          <a 
+            [class.active]="selectedCategory === category"
+            (click)="selectCategory(category)"
+          >
+            {{ category }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/products" routerLinkActive="active" (click)="isMobileMenuOpen = false">
+            <i class="fas fa-box"></i> Tüm Ürünler
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/about" routerLinkActive="active" (click)="isMobileMenuOpen = false">
+            <i class="fas fa-info-circle"></i> Hakkımızda
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" [class.active]="isMobileMenuOpen" (click)="toggleMobileMenu()"></div>

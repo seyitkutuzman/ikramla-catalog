@@ -1,0 +1,6 @@
+@SefertasiAPI_HostAddress = http://localhost:5269
+
+GET {{SefertasiAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

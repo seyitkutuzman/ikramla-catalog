@@ -1,0 +1,64 @@
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.icon-wrapper {
+  background-color: #dc3545;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.section-actions button {
+  border-radius: 25px;
+  padding: 8px 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.section-actions .btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
+
+.section-actions .btn-danger:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .section-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .section-actions button {
+    font-size: 0.85rem;
+    padding: 6px 18px;
+  }
+}

@@ -1,0 +1,35 @@
+<div class="product-card h-100">
+  <div class="discount-badge" *ngIf="product.discountPercentage">
+    %{{ product.discountPercentage }}
+  </div>
+  
+  <div class="product-image">
+    <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid">
+  </div>
+  
+  <div class="product-info p-3">
+    <h5 class="product-name">{{ product.name }}</h5>
+    <p class="product-description text-muted small">{{ product.description }}</p>
+    
+    <div class="price-section mt-3">
+      <div *ngIf="product.discountedPrice; else regularPrice">
+        <span class="original-price text-muted text-decoration-line-through">
+          {{ formatPrice(product.price) }} TL
+        </span>
+        <div class="discounted-price">
+          {{ formatPrice(product.discountedPrice) }} TL + KDV
+        </div>
+      </div>
+      
+      <ng-template #regularPrice>
+        <div class="regular-price">
+          {{ formatPrice(product.price) }} TL + KDV
+        </div>
+      </ng-template>
+    </div>
+    
+    <button class="btn btn-dark btn-sm view-details mt-3">
+      YENİ
+    </button>
+  </div>
+</div>

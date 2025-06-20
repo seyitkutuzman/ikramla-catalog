@@ -1,0 +1,21 @@
+<div class="category-filter-container py-3 bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
+      <button 
+        *ngFor="let cat of predefinedCategories" 
+        class="btn category-btn"
+        [class.active]="selectedCategory === cat.value"
+        (click)="selectCategory(cat.value)">
+        <span class="category-icon">{{ cat.icon }}</span>
+        <span class="category-name">{{ cat.name }}</span>
+      </button>
+      
+      <button 
+        *ngIf="selectedCategory"
+        class="btn btn-outline-secondary btn-sm"
+        (click)="clearFilter()">
+        <i class="fas fa-times me-1"></i> Filtreyi Temizle
+      </button>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,9 @@ public class Product
     [BsonElement("category")]
     public string Category { get; set; } = string.Empty;
 
+    [BsonElement("categoryId")]
+    public string? CategoryId { get; set; }
+
     [BsonElement("imageUrl")]
     public string ImageUrl { get; set; } = string.Empty;
 

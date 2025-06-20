@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SefertasiAPI.Models;
 using SefertasiAPI.Services;
@@ -58,6 +59,7 @@ public class ProductsController : ControllerBase
 
     // Admin işlemleri için
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> CreateProduct(Product newProduct)
     {
         await _productService.CreateAsync(newProduct);
@@ -65,6 +67,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateProduct(string id, Product updatedProduct)
     {
         var product = await _productService.GetByIdAsync(id);
@@ -81,6 +84,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteProduct(string id)
     {
         var product = await _productService.GetByIdAsync(id);

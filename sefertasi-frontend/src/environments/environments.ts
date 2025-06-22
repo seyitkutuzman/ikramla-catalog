@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7001' // Backend API URL'inizi buraya yazın
+  apiUrl: 'http://localhost:5269' // Backend API URL'inizi buraya yazın
 };

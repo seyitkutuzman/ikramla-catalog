@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SefertasiAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d62426576072f596c03de5ba8b983ee94212f51")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5dcc41572baf10a355e2bcda2972782576c0601b")]
 [assembly: System.Reflection.AssemblyProductAttribute("SefertasiAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SefertasiAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

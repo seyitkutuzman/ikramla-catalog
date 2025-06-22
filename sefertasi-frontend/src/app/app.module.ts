@@ -1,35 +1,26 @@
-// src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app';
-import { HeaderComponent } from './components/header/header';
-import { ProductListComponent } from './components/product-list/product-list';
-import { ProductCardComponent } from './components/product-card/product-card';
 import { CategoryFilterComponent } from './components/category-filter/category-filter';
-import { HeroSectionComponent } from './components/hero-section/hero-section';
-import { FooterComponent } from './components/footer/footer';
-@NgModule({
-  declarations: [
+import { ProductCardComponent } from './components/product-card/product-card';
+import { ProductListComponent } from './components/product-list/product-list';
+import { AppRoutingModule } from './app-routing.module';
 
+@NgModule({
+  // 1️⃣ Sadece bileşen/pipe/directive ekleyin
+  declarations: [
   ],
+
+  // 2️⃣ Sadece modüller ekleyin
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    AppRoutingModule
   ],
-  providers: [
-        AppComponent,
-    HeaderComponent,
-    ProductListComponent,
-    ProductCardComponent,
-    CategoryFilterComponent,
-    HeroSectionComponent,
-    FooterComponent],
-  bootstrap: [AppComponent]
+
+  providers: [],
+  bootstrap: []
 })
 export class AppModule { }

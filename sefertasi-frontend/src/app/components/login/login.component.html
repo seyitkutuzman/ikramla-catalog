@@ -1,0 +1,39 @@
+<div class="login-page d-flex justify-content-center align-items-center vh-100">
+  <div class="login-box text-center p-4 shadow rounded">
+    <img src="assets/logo.png" alt="Logo" class="login-logo mb-4" />
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3 text-start">
+        <label for="username" class="form-label">Kullanıcı Adı</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          class="form-control"
+          [(ngModel)]="username"
+          required
+        />
+      </div>
+
+      <div class="mb-3 text-start">
+        <label for="password" class="form-label">Şifre</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          class="form-control"
+          [(ngModel)]="password"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">
+        Giriş Yap
+      </button>
+
+      <div *ngIf="errorMessage" class="text-danger mt-3">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </div>
+</div>

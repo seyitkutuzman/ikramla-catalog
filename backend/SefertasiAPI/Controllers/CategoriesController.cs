@@ -7,7 +7,7 @@ using SefertasiAPI.Services;
 namespace SefertasiAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/categories")]
 public class CategoriesController : ControllerBase
 {
     private readonly CategoryService _categoryService;

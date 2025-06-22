@@ -1,0 +1,51 @@
+<!-- src/app/components/admin-dashboard/admin-dashboard.component.html -->
+<div class="admin-dashboard p-4">
+  <h1>Yönetim Paneli</h1>
+
+  <form (ngSubmit)="onSubmit()" class="mb-5">
+    <div class="row g-3">
+      <div class="col-md-4"><input type="text" class="form-control" placeholder="Ürün Adı" [(ngModel)]="model.name" name="name" required></div>
+      <div class="col-md-4"><input type="text" class="form-control" placeholder="Açıklama" [(ngModel)]="model.description" name="description" required></div>
+      <div class="col-md-2"><input type="number" class="form-control" placeholder="Fiyat" [(ngModel)]="model.price" name="price" required></div>
+      <div class="col-md-2"><input type="number" class="form-control" placeholder="İndirimli Fiyat" [(ngModel)]="model.discountedPrice" name="discountedPrice"></div>
+      <div class="col-md-2"><input type="number" class="form-control" placeholder="İndirim (%)" [(ngModel)]="model.discountPercentage" name="discountPercentage"></div>
+      <div class="col-md-3"><input type="text" class="form-control" placeholder="Kategori" [(ngModel)]="model.category" name="category" required></div>
+
+      <div class="col-12">
+        <label class="form-label">Resim Yükle</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event)" />
+      </div>
+
+      <div class="col-12 d-flex align-items-center">
+        <input type="text" class="form-control me-2" placeholder="Etiket ekle" [(ngModel)]="tagInput" name="tagInput">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="addTag()">Etiket Ekle</button>
+      </div>
+      <div class="col-12">
+        <span *ngFor="let t of model.tags; let i = index" class="badge bg-info text-dark me-1">
+          {{ t }} <i class="bi bi-x-circle" (click)="removeTag(i)" style="cursor:pointer"></i>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-success">{{ isEditMode ? 'Güncelle' : 'Ekle' }}</button>
+      </div>
+    </div>
+  </form>
+
+  <hr />
+
+  <div class="row gy-3">
+    <div *ngFor="let p of products" class="col-md-4">
+      <div class="card">
+        <img [src]="p.imageUrl" class="card-img-top">
+        <div class="card-body">
+          <h5>{{ p.name }}</h5>
+          <p>{{ p.description }}</p>
+          <p class="fw-bold">{{ p.price }} TL</p>
+          <button class="btn btn-sm btn-primary me-2" (click)="editProduct(p)">Düzenle</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteProduct(p.id!)">Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

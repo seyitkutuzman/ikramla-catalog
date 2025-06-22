@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-hero-section',
   templateUrl: './hero-section.html',
   styleUrls: ['./hero-section.scss'],
-  standalone: false
+  standalone: true,
+  imports: [CommonModule]
 })
 export class HeroSectionComponent implements OnInit {
   currentSlide = 0;

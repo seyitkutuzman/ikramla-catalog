@@ -2,12 +2,12 @@
   <div class="container">
     <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
       <button 
-        *ngFor="let cat of predefinedCategories" 
+        *ngFor="let cat of categories" 
         class="btn category-btn"
-        [class.active]="selectedCategory === cat.value"
-        (click)="selectCategory(cat.value)">
-        <span class="category-icon">{{ cat.icon }}</span>
-        <span class="category-name">{{ cat.name }}</span>
+        [class.active]="selectedCategory === cat.name"
+        (click)="selectCategory(cat.name)">
+        <!-- Eğer Category model’inizde icon veya imageUrl varsa onu da gösterebilirsiniz -->
+        {{ cat.name }}
       </button>
       
       <button 

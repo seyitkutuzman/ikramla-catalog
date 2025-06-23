@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { ProductService } from '../../services/product';
 import { Product } from '../../models/product';
+
 import { HeroSectionComponent } from '../hero-section/hero-section';
 import { ProductCardComponent } from '../product-card/product-card';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { CategoryFilterComponent } from '../category-filter/category-filter';
 
 @Component({
   selector: 'app-product-list',
-  templateUrl: './product-list.html',
-  styleUrls: ['./product-list.scss'], 
   standalone: true,
-  imports: [HeroSectionComponent, ProductCardComponent, FormsModule,CommonModule, CategoryFilterComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    HeroSectionComponent,
+    CategoryFilterComponent,
+    ProductCardComponent
+  ],
+  templateUrl: './product-list.html',
+  styleUrls: ['./product-list.scss']
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
@@ -23,41 +31,43 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.loadAllProducts();
   }
 
-  loadProducts(): void {
+  private loadAllProducts(): void {
     this.loading = true;
     this.productService.getAllProducts().subscribe({
-      next: (products) => {
+      next: products => {
         this.products = products;
         this.filteredProducts = products;
         this.loading = false;
       },
-      error: (error) => {
-        console.error('Ürünler yüklenemedi:', error);
+      error: err => {
+        console.error('Ürünler yüklenemedi:', err);
         this.loading = false;
       }
     });
   }
 
-  onCategorySelected(category: string): void {
+  onCategoryChange(category: string): void {
     this.selectedCategory = category;
-    
+    this.loading = true;
+
     if (category) {
-      this.loading = true;
       this.productService.getProductsByCategory(category).subscribe({
-        next: (products) => {
-          this.filteredProducts = products;
+        next: list => {
+          this.filteredProducts = list;
           this.loading = false;
         },
-        error: (error) => {
-          console.error('Kategori ürünleri yüklenemedi:', error);
+        error: err => {
+          console.error('Kategoriye göre ürünler yüklenemedi:', err);
           this.loading = false;
         }
       });
     } else {
+      // Filtre kaldırıldığında baştaki ürünlere dön
       this.filteredProducts = this.products;
+      this.loading = false;
     }
   }
 }

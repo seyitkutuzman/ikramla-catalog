@@ -11,7 +11,7 @@ public class AdminService
 {
     private readonly IMongoCollection<Admin> _adminsCollection;
 
-    public AdminService(IOptions<DatabaseSettings> databaseSettings)
+    public AdminService(IOptions<MongoDbSettings> databaseSettings)
     {
         var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);

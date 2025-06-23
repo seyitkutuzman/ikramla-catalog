@@ -4,6 +4,8 @@ import { ProductService } from '../../services/product';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CategoryService } from '../../services/category';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,15 +15,26 @@ import { FormsModule } from '@angular/forms';
 })
 export class AdminDashboardComponent implements OnInit {
   products: Product[] = [];
+  categories: Category[] = [];    
   model: any = { tags: [] as string[] };
   isEditMode = false;
   selectedFile?: File;
   tagInput = '';
+  newCategoryName = '';
 
-  constructor(private svc: ProductService) {}
+  constructor(private svc: ProductService, private categorySvc: CategoryService) {}
+
+   private loadCategories() {
+    // Admin sayfası olduğu için tüm kategorileri çekiyoruz
+    this.categorySvc.getAllCategories().subscribe({
+      next: cats => this.categories = cats,
+      error: err => console.error('Kategori yüklenemedi', err)
+    });
+  }
 
   ngOnInit() {
     this.load();
+    this.loadCategories();
   }
 
   load() {
@@ -100,5 +113,28 @@ export class AdminDashboardComponent implements OnInit {
     this.model = { tags: [] };
     this.selectedFile = undefined;
     this.load();
+  }
+
+    createCategory() {
+    if (!this.newCategoryName.trim()) return;
+    this.categorySvc
+      .createCategory({ name: this.newCategoryName.trim() })
+      .subscribe(() => {
+        this.newCategoryName = '';
+        this.loadCategories();
+      });
+  }
+
+  // Aktif/pasif toggle
+  toggleCategory(id: string) {
+    this.categorySvc.toggleStatus(id)
+      .subscribe(() => this.loadCategories());
+  }
+
+  // Sil
+  deleteCategory(id: string) {
+    if (!confirm('Kategori silinsin mi?')) return;
+    this.categorySvc.deleteCategory(id)
+      .subscribe(() => this.loadCategories());
   }
 }

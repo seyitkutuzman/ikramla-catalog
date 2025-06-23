@@ -9,7 +9,7 @@ public class CategoryService
     private readonly IMongoCollection<Category> _categoriesCollection;
     private readonly IMongoCollection<Product> _productsCollection;
 
-    public CategoryService(IOptions<DatabaseSettings> databaseSettings)
+    public CategoryService(IOptions<MongoDbSettings> databaseSettings)
     {
         var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);

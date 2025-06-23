@@ -4,12 +4,25 @@
 
   <form (ngSubmit)="onSubmit()" class="mb-5">
     <div class="row g-3">
-      <div class="col-md-4"><input type="text" class="form-control" placeholder="Ürün Adı" [(ngModel)]="model.name" name="name" required></div>
-      <div class="col-md-4"><input type="text" class="form-control" placeholder="Açıklama" [(ngModel)]="model.description" name="description" required></div>
-      <div class="col-md-2"><input type="number" class="form-control" placeholder="Fiyat" [(ngModel)]="model.price" name="price" required></div>
-      <div class="col-md-2"><input type="number" class="form-control" placeholder="İndirimli Fiyat" [(ngModel)]="model.discountedPrice" name="discountedPrice"></div>
-      <div class="col-md-2"><input type="number" class="form-control" placeholder="İndirim (%)" [(ngModel)]="model.discountPercentage" name="discountPercentage"></div>
-      <div class="col-md-3"><input type="text" class="form-control" placeholder="Kategori" [(ngModel)]="model.category" name="category" required></div>
+      <div class="col-md-4"><input type="text" class="form-control" placeholder="Ürün Adı" [(ngModel)]="model.name"
+          name="name" required></div>
+      <div class="col-md-4"><input type="text" class="form-control" placeholder="Açıklama"
+          [(ngModel)]="model.description" name="description" required></div>
+      <div class="col-md-2"><input type="number" class="form-control" placeholder="Fiyat" [(ngModel)]="model.price"
+          name="price" required></div>
+      <div class="col-md-2"><input type="number" class="form-control" placeholder="İndirimli Fiyat"
+          [(ngModel)]="model.discountedPrice" name="discountedPrice"></div>
+      <div class="col-md-2"><input type="number" class="form-control" placeholder="İndirim (%)"
+          [(ngModel)]="model.discountPercentage" name="discountPercentage"></div>
+      <div class="mb-3">
+        <label for="categorySelect" class="form-label">Kategori</label>
+        <select id="categorySelect" class="form-select" [(ngModel)]="model.category" name="category" required>
+          <option value="" disabled selected>-- Kategori Seçin --</option>
+          <option *ngFor="let cat of categories" [value]="cat.name">
+            {{ cat.name }}
+          </option>
+        </select>
+      </div>
 
       <div class="col-12">
         <label class="form-label">Resim Yükle</label>
@@ -49,3 +62,49 @@
     </div>
   </div>
 </div>
+
+<hr>
+<h3>Kategori Yönetimi</h3>
+
+<!-- Yeni Kategori Formu -->
+<div class="row g-2 mb-4">
+  <div class="col">
+    <input
+      [(ngModel)]="newCategoryName"
+      name="newCategoryName"
+      class="form-control"
+      placeholder="Yeni kategori adı" />
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary" (click)="createCategory()">
+      Ekle
+    </button>
+  </div>
+</div>
+
+<!-- Kategori Listesi -->
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ad</th>
+      <th>Aktif</th>
+      <th>İşlemler</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cat of categories">
+      <td>{{ cat.name }}</td>
+      <td>
+        <input
+          type="checkbox"
+          [checked]="cat.isActive"
+          (change)="toggleCategory(cat.id!)" />
+      </td>
+      <td>
+        <button class="btn btn-sm btn-danger" (click)="deleteCategory(cat.id!)">
+          Sil
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

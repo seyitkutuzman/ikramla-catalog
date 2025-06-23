@@ -8,7 +8,7 @@ public class ProductService
 {
     private readonly IMongoCollection<Product> _productsCollection;
 
-    public ProductService(IOptions<DatabaseSettings> databaseSettings)
+    public ProductService(IOptions<MongoDbSettings> databaseSettings)
     {
         var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);

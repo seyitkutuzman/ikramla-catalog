@@ -1,38 +1,26 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
+import { CommonModule }         from '@angular/common';
+import { HeroService } from '../../services/HeroService';
+import { HeroSlide } from '../../models/HeroSlides.model';
 
 @Component({
   selector: 'app-hero-section',
-  templateUrl: './hero-section.html',
-  styleUrls: ['./hero-section.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule],
+  templateUrl: './hero-section.html',
+  styleUrls: ['./hero-section.scss']
 })
 export class HeroSectionComponent implements OnInit {
+  slides: HeroSlide[] = [];
   currentSlide = 0;
-  
-  slides = [
-    {
-      image: 'assets/hero-1.jpg',
-      title: 'Lezzetli İkramlar',
-      subtitle: 'Özel günleriniz için hazır paketler'
-    },
-    {
-      image: 'assets/hero-2.jpg',
-      title: 'Taze ve Kaliteli',
-      subtitle: 'Günlük üretim, hızlı teslimat'
-    },
-    {
-      image: 'assets/hero-3.jpg',
-      title: 'Cenaze Yemekleri',
-      subtitle: 'Zor günlerinizde yanınızdayız'
-    }
-  ];
 
-  constructor() { }
+  constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {
-    this.startSlideShow();
+    this.heroService.getSlides().subscribe(data => {
+      this.slides = data;
+      this.startSlideShow();
+    });
   }
 
   startSlideShow(): void {

@@ -3,22 +3,18 @@
   <app-hero-section></app-hero-section>
   
   <!-- Category Filter -->
-  <app-category-filter (categorySelected)="onCategorySelected($event)"></app-category-filter>
+  <app-category-filter (categorySelected)="onCategoryChange($event)"></app-category-filter>
   
   <!-- Products Section -->
   <div class="container py-5">
-    <div class="section-header mb-4">
+    <div class="section-header mb-4 text-center">
       <h2 class="section-title">
         <span class="icon-wrapper">
           <i class="fas fa-utensils"></i>
         </span>
-        Sizin İçin Seçtiklerimiz
+        <!-- Başlık dinamik: seçili kategori varsa onun adı, yoksa varsayılan metin -->
+        {{ selectedCategory || 'Sizin İçin Seçtiklerimiz' }}
       </h2>
-      <div class="section-actions">
-        <button class="btn btn-danger">Çok Satanlar</button>
-        <button class="btn btn-dark">İndirimdekiler</button>
-        <button class="btn btn-outline-dark">Yeni Ürünler</button>
-      </div>
     </div>
     
     <!-- Loading State -->
@@ -38,7 +34,12 @@
     <!-- Empty State -->
     <div *ngIf="!loading && filteredProducts.length === 0" class="text-center py-5">
       <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
-      <p class="text-muted">Bu kategoride ürün bulunamadı.</p>
+      <p class="text-muted">
+        {{ selectedCategory 
+            ? 'Bu kategoride ürün bulunamadı.' 
+            : 'Listelenecek ürün bulunamadı.' 
+        }}
+      </p>
     </div>
   </div>
 </div>

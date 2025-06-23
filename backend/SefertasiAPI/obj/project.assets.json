@@ -1546,19 +1546,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\REYYAN\\.nuget\\packages\\": {}
+    "/Users/seyit/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\REYYAN\\ikramla-catalog\\backend\\SefertasiAPI\\SefertasiAPI.csproj",
+      "projectUniqueName": "/Users/seyit/Projects/ikramla-catalog/backend/SefertasiAPI/SefertasiAPI.csproj",
       "projectName": "SefertasiAPI",
-      "projectPath": "C:\\Users\\REYYAN\\ikramla-catalog\\backend\\SefertasiAPI\\SefertasiAPI.csproj",
-      "packagesPath": "C:\\Users\\REYYAN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\REYYAN\\ikramla-catalog\\backend\\SefertasiAPI\\obj\\",
+      "projectPath": "/Users/seyit/Projects/ikramla-catalog/backend/SefertasiAPI/SefertasiAPI.csproj",
+      "packagesPath": "/Users/seyit/.nuget/packages/",
+      "outputPath": "/Users/seyit/Projects/ikramla-catalog/backend/SefertasiAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\REYYAN\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/seyit/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -1627,7 +1627,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.411/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

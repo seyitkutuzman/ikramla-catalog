@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../services/category';
 import { Category } from '../../models/category';
+import { HeroService } from '../../services/HeroService';
+import { HeroSlide } from '../../models/HeroSlides.model';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -16,13 +18,19 @@ import { Category } from '../../models/category';
 export class AdminDashboardComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = [];    
+  heroSlides: HeroSlide[] = [];
   model: any = { tags: [] as string[] };
   isEditMode = false;
   selectedFile?: File;
   tagInput = '';
   newCategoryName = '';
+  slideFile?: File;
+  slideTitle = '';
+  slideSubtitle = '';
+  slideOrder = 0;
 
-  constructor(private svc: ProductService, private categorySvc: CategoryService) {}
+
+  constructor(private svc: ProductService, private categorySvc: CategoryService, private heroSvc: HeroService) {}
 
    private loadCategories() {
     // Admin sayfası olduğu için tüm kategorileri çekiyoruz
@@ -35,7 +43,46 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
     this.load();
     this.loadCategories();
+    this.loadHeroSlides();
   }
+  private loadHeroSlides() {
+    this.heroSvc.getSlides().subscribe(slides => this.heroSlides = slides);
+  }
+
+  // Yeni: slayt için dosya seçince tetiklenir
+  onSlideFileSelected(e: Event) {
+    const input = e.target as HTMLInputElement;
+    if (input.files?.length) this.slideFile = input.files[0];
+  }
+
+  // Yeni: Hero slayt oluştur
+  createSlide() {
+    if (!this.slideFile) return alert('Lütfen bir resim seçin.');
+    const form = new FormData();
+    form.append('image', this.slideFile);
+    form.append('title', this.slideTitle);
+    form.append('subtitle', this.slideSubtitle);
+    form.append('order', this.slideOrder.toString());
+
+    this.heroSvc.createSlide(form).subscribe({
+      next: slide => {
+        // formu sıfırla ve listeyi yenile
+        this.slideFile = undefined;
+        this.slideTitle = '';
+        this.slideSubtitle = '';
+        this.slideOrder = 0;
+        this.loadHeroSlides();
+      },
+      error: err => console.error('Slide oluşturulamadı', err)
+    });
+  }
+
+  // Yeni: Hero slayt sil
+  deleteSlide(id: string) {
+    if (!confirm('Bu slaytı silmek istediğinizden emin misiniz?')) return;
+    this.heroSvc.deleteSlide(id).subscribe(() => this.loadHeroSlides());
+  }
+
 
   load() {
     this.svc.getAllProducts().subscribe((list) => (this.products = list));
@@ -62,7 +109,7 @@ export class AdminDashboardComponent implements OnInit {
   getImageUrl(imageUrl: string): string {
     if (!imageUrl) return '/assets/placeholder.jpg';
     if (imageUrl.startsWith('http')) return imageUrl;
-    return `https://localhost:5269${imageUrl}`;
+    return `http://localhost:5269${imageUrl}`;
   }
 
   onImageError(event: any): void {

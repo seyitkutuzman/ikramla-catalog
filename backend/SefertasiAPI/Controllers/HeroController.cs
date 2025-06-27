@@ -27,7 +27,8 @@ public class HeroController : ControllerBase
         return await _slides.Find(_ => true).SortBy(s => s.Order).ToListAsync();
     }
 
-    [HttpPost, Authorize(Roles = "Admin")]
+    [AllowAnonymous]
+    [HttpPost]
     public async Task<ActionResult<HeroSlide>> Create([FromForm] IFormFile image,
                                                       [FromForm] string title,
                                                       [FromForm] string subtitle,
@@ -63,7 +64,8 @@ public class HeroController : ControllerBase
         return CreatedAtAction(nameof(GetAll), new { id = slide.Id }, slide);
     }
 
-    [HttpDelete("{id}"), Authorize(Roles = "Admin")]
+    [HttpDelete("{id}")]
+    [AllowAnonymous]
     public async Task<IActionResult> Delete(string id)
     {
         var result = await _slides.DeleteOneAsync(s => s.Id == id);

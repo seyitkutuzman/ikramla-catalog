@@ -1,11 +1,11 @@
 {
   "/api": {
-    "target": "https://localhost:5269",
+    "target": "http://localhost:5269",
     "secure": false,
     "changeOrigin": true
   },
   "/uploads": {
-    "target": "https://localhost:5269",
+    "target": "http://localhost:5269",
     "secure": false,
     "changeOrigin": true
   }

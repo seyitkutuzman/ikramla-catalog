@@ -30,7 +30,7 @@ export class ProductCardComponent {
     }
 
     // Backend URL'ini ekle
-    const baseUrl = environment.apiUrl || 'https://localhost:5269';
+    const baseUrl = environment.apiUrl || 'http://localhost:5269';
     return `${baseUrl}${imageUrl}`;
   }
 

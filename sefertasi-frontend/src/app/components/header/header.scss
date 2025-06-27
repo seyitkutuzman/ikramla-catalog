@@ -1,31 +1,22 @@
-.navbar {
-  padding: 1rem 0;
+/* logo boyutunu kontrol etmek için */
+#header-wrap .logo-img {
+  height: 40px;
+  width: auto;
 }
 
-.contact-info {
-  color: #666;
+/* sticky-top yaptığımız navbar’ın z-index’i yeterli olsun */
+#header-wrap .navbar {
+  z-index: 1000;
 }
 
-.search-box {
-  width: 300px;
+/* input-group’ın yüksekliğini navbar ile hizala */
+#header-wrap .input-group .form-control {
+  height: calc(1.5em + 0.75rem + 2px);
 }
 
-.search-box .form-control {
-  border-radius: 20px 0 0 20px;
-  border-right: none;
-}
-
-.search-box .btn {
-  border-radius: 0 20px 20px 0;
-  border-left: none;
-  background-color: white;
-}
-
-.search-box .form-control:focus {
-  box-shadow: none;
-  border-color: #dc3545;
-}
-
-.search-box .btn:hover {
-  background-color: #f8f9fa;
+/* küçük ekranlarda WhatsApp metnini gizleyip sadece ikonu göster */
+@media (max-width: 991.98px) {
+  #header-wrap .fab.fa-whatsapp + .small {
+    display: none;
+  }
 }

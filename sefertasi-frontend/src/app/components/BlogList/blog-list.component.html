@@ -1,0 +1,24 @@
+<!-- src/app/components/blog-list/blog-list.component.html -->
+<div class="blog-list container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let post of blogs">
+      <div class="card blog-card h-100 mx-auto">
+        <img
+          [src]="post.imageUrl"
+          class="card-img-top"
+          alt="{{ post.title }}"
+        >
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text">{{ post.summary }}</p>
+          <a
+            [routerLink]="['/blog', post.id]"
+            class="btn btn-sm btn-primary mt-auto"
+          >
+            Devamını Oku
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

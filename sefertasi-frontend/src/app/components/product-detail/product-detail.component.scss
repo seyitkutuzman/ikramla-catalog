@@ -1,0 +1,139 @@
+/* src/app/components/product-detail/product-detail.component.scss */
+
+:host {
+    display: block;
+}
+
+/* Container padding */
+.container {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* “Geri dön” butonu */
+.btn-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1a73e8;
+    padding-left: 0;
+
+    &:hover {
+        text-decoration: underline;
+        color: darken(#1a73e8, 10%);
+    }
+}
+
+/* Yükleniyor spinner’ı */
+.text-center {
+    .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+/* Ürün detay kartı */
+.row {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+/* Resim kolonu */
+.col-md-6 {
+    &.img-col {
+        img {
+            max-width: 500px;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+/* Metin kolonu */
+.col-md-6 {
+    &.info-col {
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .text-muted {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        h3 {
+            margin-top: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+        }
+    }
+}
+
+/* Hata mesajı */
+.alert-danger {
+    margin-top: 2rem;
+    font-weight: 500;
+}
+
+/* blog-detail.component.scss */
+
+.related-section {
+  padding-top: 1rem;
+
+  /* Başlığı sola hizala */
+  .related-title {
+    text-align: left;
+    margin-left: 70px;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  .row {
+    display: flex;
+    margin-left: 70px;
+    flex-wrap: wrap;
+    justify-content: flex-start;  /* SOLA dayalı */
+    align-items: flex-start;       /* yukarıdayla hizalı */
+    gap: 1rem;
+    margin: 0;                     /* soldan boşluk kaldırıldı */
+  }
+
+  .card {
+    margin-left: 70px;
+    max-width: 18rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+  }
+
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

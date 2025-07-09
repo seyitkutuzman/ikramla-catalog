@@ -1,45 +1,102 @@
 <div class="product-list-container">
   <!-- Hero Section -->
   <app-hero-section></app-hero-section>
-  
+
   <!-- Category Filter -->
   <app-category-filter (categorySelected)="onCategoryChange($event)"></app-category-filter>
-  
+
   <!-- Products Section -->
   <div class="container py-5">
     <div class="section-header mb-4 text-center">
       <h2 class="section-title">
-        <span class="icon-wrapper">
-          <i class="fas fa-utensils"></i>
-        </span>
-        <!-- Başlık dinamik: seçili kategori varsa onun adı, yoksa varsayılan metin -->
+        <span class="icon-wrapper"><i class="fas fa-utensils"></i></span>
         {{ selectedCategory || 'Sizin İçin Seçtiklerimiz' }}
       </h2>
     </div>
-    
+
     <!-- Loading State -->
     <div *ngIf="loading" class="text-center py-5">
       <div class="spinner-border text-danger" role="status">
         <span class="visually-hidden">Yükleniyor...</span>
       </div>
     </div>
-    
-    <!-- Products Grid -->
+
+    <!-- Ürün Kartları -->
     <div *ngIf="!loading && filteredProducts.length > 0" class="row g-4">
-      <div *ngFor="let product of filteredProducts" class="col-lg-3 col-md-4 col-sm-6">
-        <app-product-card [product]="product"></app-product-card>
+      <div *ngFor="let p of filteredProducts" class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card product-card h-100">
+          <img [src]="p.imageUrl" class="card-img-top" alt="{{p.name}}">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ p.name }}</h5>
+            <p class="mt-auto">
+              <a [routerLink]="['/product-detail', p.id]" class="btn btn-outline-primary btn-sm">
+                Detay
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    
+
     <!-- Empty State -->
     <div *ngIf="!loading && filteredProducts.length === 0" class="text-center py-5">
       <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
       <p class="text-muted">
-        {{ selectedCategory 
-            ? 'Bu kategoride ürün bulunamadı.' 
-            : 'Listelenecek ürün bulunamadı.' 
+        {{ selectedCategory
+            ? 'Bu kategoride ürün bulunamadı.'
+            : 'Listelenecek ürün bulunamadı.'
         }}
       </p>
     </div>
   </div>
 </div>
+
+
+<section id="about">
+  <div class="about-container">
+    <!-- Hakkımızda -->
+    <div class="about-left">
+      <h2>Hakkımızda</h2>
+      <p>
+        Sefertası, uzun yıllara dayanan mutfak deneyimini kurumsal ve bireysel ihtiyaçlara
+        yönelik “tabldot yemek” çözümleriyle buluşturan bir yemek hizmetleri platformudur.
+        Modern tesislerimizde, alanında uzman şeflerimiz gözetiminde hazırlanan günlük menülerimiz,
+        her sabah taze malzemelerle özenle pişirilir, vakumlu ve hijyenik paketlerimizle taze-sıcak
+        olarak adresinize teslim edilir. Kurulduğumuz ilk günden bu yana kalite ve müşteri
+        memnuniyetini en ön planda tutuyor, dakik servis anlayışımız ve esnek bayilik
+        seçeneklerimizle işletmenizin veya etkinliğinizin tam da ihtiyaç duyduğu zamanda,
+        tam da istediğiniz lezzeti sunuyoruz.
+      </p>
+    </div>
+
+    <!-- Logo Ortada -->
+    <div class="about-logo">
+      <img src="/assets/logo.png" alt="Sefertası Logo" />
+    </div>
+
+    <!-- Neden Tercih Etmelisiniz -->
+    <div class="about-right">
+      <h2>Neden Sefertası’yı Tercih Etmelisiniz?</h2>
+      <ul>
+        <li>Günlük Taze Menü: Mevsimine göre seçilen sebze-meyveler ve birinci sınıf et ürünleri her sabah tazecik
+          pişirilir.</li>
+        <li>Hijyenik Ambalaj & Soğuk Zincir: Özel vakum paketleme ve termobox ile gıda güvenliğini maksimum düzeyde
+          sağlıyoruz.</li>
+        <li>Zamanında Teslimat: Planladığınız saatte ve adrese, donanımlı araç filomuzla kesintisiz teslimat garantisi.
+        </li>
+        <li>Esnek Menü Seçenekleri: Vegan, vejetaryen, glutensiz ve özel diyet taleplerinize uygun çeşitler sunuyoruz.
+        </li>
+        <li>Uygun Fiyat-Performans: Toplu alımlarda indirimli tarifelerimiz, şeffaf fiyat politikamız ve paket servis
+          avantajlarımızla bütçenizi koruruz.</li>
+        <li>Profesyonel Mutfak Ekibi: Sertifikalı aşçılarımız ve kalite kontrol ekibimiz her aşamada lezzet ve hijyen
+          takibi yapar.</li>
+        <li>Kolay Online Sipariş & Destek: Mobil veya web üzerinden hızlı sipariş altyapımız ve 7/24 müşteri destek
+          hattımız ile yanınızdayız.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<h3 class="mt-5">Son Blog Yazıları</h3>
+<app-blog-list></app-blog-list>
+<!-- HTML (about.html) -->

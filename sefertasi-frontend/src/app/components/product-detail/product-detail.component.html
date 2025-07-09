@@ -1,0 +1,46 @@
+<div class="container py-5">
+    <button class="btn btn-fancy mb-3" (click)="goHome()">
+        <i class="fas fa-home me-2"></i>
+        Anasayfa
+    </button>
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!loading && product">
+        <div class="row">
+            <div class="col-md-6 img-col">
+                <img [src]="product.imageUrl" alt="{{ product.name }}" class="img-fluid rounded" />
+            </div>
+            <div class="col-md-6 info-col">
+                <h1>{{ product.name }}</h1>
+                <p class="text-muted">Kategori: {{ product.category }}</p>
+                <p>{{ product.description }}</p>
+                <h3 class="text-danger">{{ product.price | number:'1.2-2' }} TL</h3>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+</div>
+
+<!-- … mevcut ürün detayı … -->
+
+<section *ngIf="related.length" class="related-section">
+  <h3 class="related-title">İlgili Ürünler</h3>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let p of related">
+      <div class="card mb-3">
+        <img [src]="p.imageUrl" class="card-img-top" alt="{{p.name}}">
+        <div class="card-body">
+          <h6 class="card-title">{{ p.name }}</h6>
+          <button class="btn btn-sm btn-outline-primary"
+                  [routerLink]="['/product-detail', p.id]">
+            İncele →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

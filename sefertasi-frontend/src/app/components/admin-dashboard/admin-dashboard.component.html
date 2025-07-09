@@ -6,57 +6,27 @@
   <form (ngSubmit)="onSubmit()" class="mb-5">
     <div class="row g-3">
       <div class="col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Ürün Adı"
-          [(ngModel)]="model.name"
-          name="name"
-          required />
+        <input type="text" class="form-control" placeholder="Ürün Adı" [(ngModel)]="model.name" name="name" required />
       </div>
       <div class="col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Açıklama"
-          [(ngModel)]="model.description"
-          name="description"
-          required />
+        <input type="text" class="form-control" placeholder="Açıklama" [(ngModel)]="model.description"
+          name="description" required />
       </div>
       <div class="col-md-2">
-        <input
-          type="number"
-          class="form-control"
-          placeholder="Fiyat"
-          [(ngModel)]="model.price"
-          name="price"
-          required />
+        <input type="number" class="form-control" placeholder="Fiyat" [(ngModel)]="model.price" name="price" required />
       </div>
       <div class="col-md-2">
-        <input
-          type="number"
-          class="form-control"
-          placeholder="İndirimli Fiyat"
-          [(ngModel)]="model.discountedPrice"
+        <input type="number" class="form-control" placeholder="İndirimli Fiyat" [(ngModel)]="model.discountedPrice"
           name="discountedPrice" />
       </div>
       <div class="col-md-2">
-        <input
-          type="number"
-          class="form-control"
-          placeholder="İndirim (%)"
-          [(ngModel)]="model.discountPercentage"
+        <input type="number" class="form-control" placeholder="İndirim (%)" [(ngModel)]="model.discountPercentage"
           name="discountPercentage" />
       </div>
 
       <div class="col-md-4 mb-3">
         <label for="categorySelect" class="form-label">Kategori</label>
-        <select
-          id="categorySelect"
-          class="form-select"
-          [(ngModel)]="model.category"
-          name="category"
-          required>
+        <select id="categorySelect" class="form-select" [(ngModel)]="model.category" name="category" required>
           <option value="" disabled selected>-- Kategori Seçin --</option>
           <option *ngFor="let cat of categories" [value]="cat.name">
             {{ cat.name }}
@@ -66,44 +36,26 @@
 
       <div class="col-12">
         <label class="form-label">Resim Yükle</label>
-        <input
-          type="file"
-          class="form-control"
-          (change)="onFileSelected($event)" />
+        <input type="file" class="form-control" (change)="onFileSelected($event)" />
       </div>
 
       <div class="col-12 d-flex align-items-center">
-        <input
-          type="text"
-          class="form-control me-2"
-          placeholder="Etiket ekle"
-          [(ngModel)]="tagInput"
-          name="tagInput" />
-        <button
-          type="button"
-          class="btn btn-sm btn-secondary"
-          (click)="addTag()">
+        <input type="text" class="form-control me-2" placeholder="Etiket ekle" [(ngModel)]="tagInput" name="tagInput" />
+        <button type="button" class="btn btn-sm btn-secondary" (click)="addTag()">
           Etiket Ekle
         </button>
       </div>
 
       <div class="col-12">
-        <span
-          *ngFor="let t of model.tags; let i = index"
-          class="badge bg-info text-dark me-1">
+        <span *ngFor="let t of model.tags; let i = index" class="badge bg-info text-dark me-1">
           {{ t }}
-          <i
-            class="bi bi-x-circle"
-            (click)="removeTag(i)"
-            style="cursor:pointer">
+          <i class="bi bi-x-circle" (click)="removeTag(i)" style="cursor:pointer">
           </i>
         </span>
       </div>
 
       <div class="col-12">
-        <button
-          type="submit"
-          class="btn btn-success">
+        <button type="submit" class="btn btn-success">
           {{ isEditMode ? 'Güncelle' : 'Ekle' }}
         </button>
       </div>
@@ -116,22 +68,15 @@
   <div class="row gy-3">
     <div *ngFor="let p of products" class="col-md-4">
       <div class="card">
-        <img
-          [src]="p.imageUrl"
-          class="card-img-top"
-          alt="{{ p.name }}" />
+        <img [src]="p.imageUrl" class="card-img-top" alt="{{ p.name }}" />
         <div class="card-body">
           <h5 class="card-title">{{ p.name }}</h5>
           <p class="card-text">{{ p.description }}</p>
           <p class="fw-bold">{{ p.price }} TL</p>
-          <button
-            class="btn btn-sm btn-primary me-2"
-            (click)="editProduct(p)">
+          <button class="btn btn-sm btn-primary me-2" (click)="editProduct(p)">
             Düzenle
           </button>
-          <button
-            class="btn btn-sm btn-danger"
-            (click)="deleteProduct(p.id!)">
+          <button class="btn btn-sm btn-danger" (click)="deleteProduct(p.id!)">
             Sil
           </button>
         </div>
@@ -148,16 +93,11 @@
 
   <div class="row g-2 mb-4">
     <div class="col">
-      <input
-        [(ngModel)]="newCategoryName"
-        name="newCategoryName"
-        class="form-control"
+      <input [(ngModel)]="newCategoryName" name="newCategoryName" class="form-control"
         placeholder="Yeni kategori adı" />
     </div>
     <div class="col-auto">
-      <button
-        class="btn btn-primary"
-        (click)="createCategory()">
+      <button class="btn btn-primary" (click)="createCategory()">
         Ekle
       </button>
     </div>
@@ -175,15 +115,10 @@
       <tr *ngFor="let cat of categories">
         <td>{{ cat.name }}</td>
         <td>
-          <input
-            type="checkbox"
-            [checked]="cat.isActive"
-            (change)="toggleCategory(cat.id!)" />
+          <input type="checkbox" [checked]="cat.isActive" (change)="toggleCategory(cat.id!)" />
         </td>
         <td>
-          <button
-            class="btn btn-sm btn-danger"
-            (click)="deleteCategory(cat.id!)">
+          <button class="btn btn-sm btn-danger" (click)="deleteCategory(cat.id!)">
             Sil
           </button>
         </td>
@@ -201,38 +136,21 @@
   <div class="hero-admin-form mb-4">
     <div>
       <label>Resim:</label>
-      <input
-        type="file"
-        class="form-control"
-        (change)="onSlideFileSelected($event)" />
+      <input type="file" class="form-control" (change)="onSlideFileSelected($event)" />
     </div>
     <div>
       <label>Başlık:</label>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="slideTitle"
-        name="slideTitle" />
+      <input type="text" class="form-control" [(ngModel)]="slideTitle" name="slideTitle" />
     </div>
     <div>
       <label>Alt Başlık:</label>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="slideSubtitle"
-        name="slideSubtitle" />
+      <input type="text" class="form-control" [(ngModel)]="slideSubtitle" name="slideSubtitle" />
     </div>
     <div>
       <label>Order:</label>
-      <input
-        type="number"
-        class="form-control"
-        [(ngModel)]="slideOrder"
-        name="slideOrder" />
+      <input type="number" class="form-control" [(ngModel)]="slideOrder" name="slideOrder" />
     </div>
-    <button
-      class="btn btn-primary"
-      (click)="createSlide()">
+    <button class="btn btn-primary" (click)="createSlide()">
       Slayt Ekle
     </button>
   </div>
@@ -250,18 +168,78 @@
     <tbody>
       <tr *ngFor="let s of heroSlides">
         <td>
-          <img
-            [src]="getImageUrl(s.imageUrl)"
-            height="50"
-            alt="{{ s.title }}" />
+          <img [src]="getImageUrl(s.imageUrl)" height="50" alt="{{ s.title }}" />
         </td>
         <td>{{ s.title }}</td>
         <td>{{ s.subtitle }}</td>
         <td>{{ s.order }}</td>
         <td>
-          <button
-            class="btn btn-sm btn-danger"
-            (click)="deleteSlide(s.id!)">
+          <button class="btn btn-sm btn-danger" (click)="deleteSlide(s.id!)">
+            Sil
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="admin-dashboard p-4">
+  <h3>Blog Post Yönetimi</h3>
+  <div class="row g-3 align-items-end mb-4">
+    <div class="col-md-3">
+      <label class="form-label">Başlık</label>
+      <input type="text" class="form-control" [(ngModel)]="blogTitle" name="blogTitle" placeholder="Blog başlığı" />
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Özet</label>
+      <input type="text" class="form-control" [(ngModel)]="blogSummary" name="blogSummary" placeholder="Kısa özet" />
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="categorySelect" class="form-label">Kategori</label>
+      <select id="categorySelect" class="form-select" [(ngModel)]="blogCategory" name="category" required>
+        <option value="" disabled selected>-- Kategori Seçin --</option>
+        <option *ngFor="let cat of categories" [value]="cat.name">
+          {{ cat.name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-5">
+      <label class="form-label">Resim Yükle</label>
+      <input type="file" class="form-control" (change)="onBlogFileSelected($event)" />
+    </div>
+    <!-- admin-dashboard.component.html -->
+    <div class="col-12">
+      <label class="form-label">İçerik</label>
+      <angular-editor [(ngModel)]="blogContent" [config]="editorConfig" name="blogContent">
+      </angular-editor>
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-primary" (click)="createBlogPost()">
+        Yeni Blog Post Oluştur
+      </button>
+    </div>
+  </div>
+
+  <!-- Blog Post Listesi -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Önizleme</th>
+        <th>Başlık</th>
+        <th>Oluşturulma</th>
+        <th>Sil</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of blogPosts">
+        <td>
+          <img [src]="getImageUrl(post.imageUrl)" height="50" alt="{{ post.title }}" />
+        </td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.createdAt | date:'short' }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="deleteBlogPost(post.id!)">
             Sil
           </button>
         </td>

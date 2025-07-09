@@ -7,7 +7,9 @@ import { HttpClientModule }  from '@angular/common/http';
 import { HeaderComponent } from './components/header/header';
 import { FooterComponent } from './components/footer/footer';
 import { HeroSectionComponent } from './components/hero-section/hero-section';
+import { BlogListComponent } from './components/BlogList/BlogList';
 import { filter } from 'rxjs';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +20,7 @@ import { filter } from 'rxjs';
     FormsModule,
     HttpClientModule,
     HeaderComponent,
-    FooterComponent,
-    HeroSectionComponent
+    FooterComponent
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']

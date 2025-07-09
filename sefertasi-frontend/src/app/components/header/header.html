@@ -1,25 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" routerLink="/">
       <img src="/assets/logo.png" alt="Logo" class="logo-img">
     </a>
 
-    <div class="d-flex align-items-center ms-auto">
-      <div class="contact-info me-4">
-        <i class="fab fa-whatsapp"></i>
-        <span class="small">WhatsApp Destek Hattı : +90 532 585 77 17</span>
-      </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar" aria-controls="mainNavbar"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="search-box me-3">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Ürün ara..." [(ngModel)]="searchTerm"
-            (keyup.enter)="onSearch()">
-          <button class="btn btn-outline-secondary" type="button" (click)="onSearch()">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-      <a routerLink="/login" class="btn btn-outline-secondary">Hesabım</a>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- (Kategori linklerini buraya alabilirsin) -->
+      </ul>
+
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item d-none d-lg-flex align-items-center me-4">
+          <i class="fab fa-whatsapp fa-lg text-success me-2"></i>
+          <span class="small">WhatsApp Sipariş: +90 532 585 77 17</span>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

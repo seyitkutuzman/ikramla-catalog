@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { ProductService } from '../../services/product';
 import { Product } from '../../models/product';
-
 import { HeroSectionComponent } from '../hero-section/hero-section';
-import { ProductCardComponent } from '../product-card/product-card';
 import { CategoryFilterComponent } from '../category-filter/category-filter';
+import { Router, RouterModule } from '@angular/router';
+import { BlogListComponent } from '../BlogList/BlogList';
 
 @Component({
   selector: 'app-product-list',
@@ -17,7 +16,8 @@ import { CategoryFilterComponent } from '../category-filter/category-filter';
     FormsModule,
     HeroSectionComponent,
     CategoryFilterComponent,
-    ProductCardComponent
+    RouterModule,
+    BlogListComponent
   ],
   templateUrl: './product-list.html',
   styleUrls: ['./product-list.scss']
@@ -28,7 +28,7 @@ export class ProductListComponent implements OnInit {
   loading: boolean = true;
   selectedCategory: string = '';
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadAllProducts();

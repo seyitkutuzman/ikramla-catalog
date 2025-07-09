@@ -1,0 +1,60 @@
+<div class="blog-detail container py-5">
+  <!-- Anasayfa Butonu -->
+  <button class="btn btn-fancy mb-4" (click)="goHome()">
+    <i class="fas fa-home me-2"></i>
+    Anasayfa
+  </button>
+
+  <!-- Yükleniyor Spinner -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- İçerik -->
+  <section *ngIf="!loading && post" class="post-content">
+    <!-- Başlık ve Tarih -->
+    <header class="mb-4">
+      <h1 class="post-title">{{ post.title }}</h1>
+      <p class="post-date text-muted">
+        {{ post.createdAt | date: 'longDate' }}
+      </p>
+    </header>
+
+    <!-- Görsel -->
+    <div class="mb-4 text-center">
+      <img
+        [src]="post.imageUrl"
+        alt="{{ post.title }}"
+        class="img-fluid post-image rounded shadow-sm"
+      >
+    </div>
+
+    <!-- Ana Metin -->
+    <article class="post-body" [innerHTML]="post.content"></article>
+  </section>
+
+  <!-- Hata Mesajı -->
+  <div *ngIf="error" class="alert alert-danger mt-4">
+    {{ error }}
+  </div>
+</div>
+
+<section *ngIf="related.length" class="related-section">
+  <h3 class="related-title">Bu kategorideki diğer ürünler</h3>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let p of related">
+      <div class="card mb-3">
+        <img [src]="p.imageUrl" class="card-img-top" alt="{{p.name}}">
+        <div class="card-body">
+          <h6 class="card-title">{{ p.name }}</h6>
+          <button class="btn btn-sm btn-outline-primary"
+                  [routerLink]="['/product-detail', p.id]">
+            İncele →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

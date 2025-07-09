@@ -1,0 +1,144 @@
+.blog-detail {
+    // genel container
+    max-width: 800px;
+    margin: 0 auto;
+
+    .post-content {
+        .post-body {
+            /* Preserve newlines in the raw HTML/text as line breaks */
+            white-space: pre-wrap;
+
+            /* Paragraph spacing */
+            p {
+                margin-bottom: 1.5rem;
+            }
+
+            /* Emoji font fallback */
+            font-family: -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            "Helvetica Neue",
+            Arial,
+            sans-serif,
+            "Apple Color Emoji",
+            "Segoe UI Emoji",
+            "Segoe UI Symbol";
+
+            /* Optional: increase line-height for readability */
+            line-height: 1.8;
+            color: #444;
+        }
+
+        header {
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+
+            .post-title {
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin: 0;
+                color: #333;
+            }
+
+            .post-date {
+                font-size: 0.9rem;
+                margin-top: 0.5rem;
+            }
+        }
+
+        .post-image {
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        .post-body {
+            line-height: 1.75;
+            color: #444;
+
+            p {
+                margin-bottom: 1rem;
+            }
+
+            h2,
+            h3,
+            h4 {
+                margin-top: 2rem;
+                margin-bottom: 1rem;
+                color: #222;
+            }
+
+            a {
+                color: #007bff;
+                text-decoration: underline;
+
+                &:hover {
+                    color: #0056b3;
+                }
+            }
+
+            blockquote {
+                border-left: 4px solid #ddd;
+                padding-left: 1rem;
+                color: #666;
+                font-style: italic;
+                margin: 1.5rem 0;
+            }
+
+            img {
+                max-width: 100%;
+                margin: 1.5rem 0;
+                border-radius: 0.25rem;
+            }
+        }
+    }
+
+    .alert {
+        max-width: 600px;
+        margin: 2rem auto;
+    }
+}
+
+.related-section {
+  padding-top: 1rem;
+
+  /* Başlığı sola hizala */
+  .related-title {
+    text-align: left;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;  /* SOLA dayalı */
+    align-items: flex-start;       /* yukarıdayla hizalı */
+    gap: 1rem;
+    margin: 0;                     /* soldan boşluk kaldırıldı */
+  }
+
+  .card {
+    max-width: 18rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+  }
+
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

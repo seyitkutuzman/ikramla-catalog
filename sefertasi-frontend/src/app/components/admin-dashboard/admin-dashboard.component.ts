@@ -1,23 +1,28 @@
-// src/app/components/admin-dashboard/admin-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../services/product';
-import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CategoryService } from '../../services/category';
-import { Category } from '../../models/category';
-import { HeroService } from '../../services/HeroService';
-import { HeroSlide } from '../../models/HeroSlides.model';
 
+import { ProductService } from '../../services/product';
+import { CategoryService } from '../../services/category';
+import { HeroService } from '../../services/HeroService';
+import { BlogService } from '../../services/BlogService';
+
+import { Product } from '../../models/product';
+import { Category } from '../../models/category';
+import { HeroSlide } from '../../models/HeroSlides.model';
+import { BlogPost } from '../../models/BlogPost';
+
+import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AngularEditorModule ],
   templateUrl: './admin-dashboard.component.html',
 })
 export class AdminDashboardComponent implements OnInit {
+  // Ürün, kategori, slide alanları (aynı)
   products: Product[] = [];
-  categories: Category[] = [];    
+  categories: Category[] = [];
   heroSlides: HeroSlide[] = [];
   model: any = { tags: [] as string[] };
   isEditMode = false;
@@ -29,22 +34,91 @@ export class AdminDashboardComponent implements OnInit {
   slideSubtitle = '';
   slideOrder = 0;
 
+  // ★ Blog alanları ★
+  blogPosts: BlogPost[] = [];
+  blogTitle = '';
+  blogSummary = '';
+  blogContent = '';
+  blogFile?: File;
+  blogCategory = '';
 
-  constructor(private svc: ProductService, private categorySvc: CategoryService, private heroSvc: HeroService) {}
+  public editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Buraya yazınızı girin...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      // mesela bu iki grubu gizliyoruz, isterseniz kaldırabilirsiniz
+      ['insertImage', 'insertVideo'],
+      ['fontSize']
+    ]
+    // geri kalan seçenekleri docs’tan (https://github.com/kolkov/angular-editor) görebilirsiniz
+  };
 
-   private loadCategories() {
-    // Admin sayfası olduğu için tüm kategorileri çekiyoruz
-    this.categorySvc.getAllCategories().subscribe({
-      next: cats => this.categories = cats,
-      error: err => console.error('Kategori yüklenemedi', err)
-    });
-  }
+
+  constructor(
+    private svc: ProductService,
+    private categorySvc: CategoryService,
+    private heroSvc: HeroService,
+    private blogSvc: BlogService
+  ) { }
 
   ngOnInit() {
     this.load();
     this.loadCategories();
     this.loadHeroSlides();
+    this.loadBlogPosts();         // ★ eksik metodu çağırıyoruz
   }
+
+  // ★ Blog postları yükleyen metot
+  private loadBlogPosts() {
+    this.blogSvc.getBlogs().subscribe(posts => this.blogPosts = posts);
+  }
+
+  // ★ Dosya seçimi
+  onBlogFileSelected(e: Event) {
+    const input = e.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.blogFile = input.files[0];
+    }
+  }
+
+  // ★ Yeni blog post oluştur
+  createBlogPost() {
+    if (!this.blogTitle.trim() || !this.blogContent.trim()) {
+      return alert('Başlık ve içerik zorunludur.');
+    }
+    const form = new FormData();
+    form.append('Title', this.blogTitle);
+    form.append('Summary', this.blogSummary);
+    form.append('Content', this.blogContent);
+    form.append('Category', this.blogCategory);
+    if (this.blogFile) {
+      form.append('ImageFile', this.blogFile, this.blogFile.name);
+    }
+    this.blogSvc.createBlog(form).subscribe({
+      next: () => {
+        this.blogTitle = '';
+        this.blogSummary = '';
+        this.blogContent = '';
+        this.blogCategory = '';
+        this.blogFile = undefined;
+        this.loadBlogPosts();
+      },
+      error: err => console.error('Blog post oluşturulamadı', err)
+    });
+  }
+
+  // ★ Blog post sil
+  deleteBlogPost(id: string) {
+    if (!confirm('Bu blog postu silmek istediğinize emin misiniz?')) return;
+    this.blogSvc.deleteBlog(id).subscribe(() => this.loadBlogPosts());
+  }
+
   private loadHeroSlides() {
     this.heroSvc.getSlides().subscribe(slides => this.heroSlides = slides);
   }
@@ -124,7 +198,13 @@ export class AdminDashboardComponent implements OnInit {
   deleteProduct(id: string) {
     this.svc.deleteProduct(id).subscribe(() => this.load());
   }
-
+  private loadCategories() {
+    // Admin sayfası olduğu için tüm kategorileri çekiyoruz
+    this.categorySvc.getAllCategories().subscribe({
+      next: cats => this.categories = cats,
+      error: err => console.error('Kategori yüklenemedi', err)
+    });
+  }
   onSubmit() {
     const form = new FormData();
 
@@ -162,7 +242,7 @@ export class AdminDashboardComponent implements OnInit {
     this.load();
   }
 
-    createCategory() {
+  createCategory() {
     if (!this.newCategoryName.trim()) return;
     this.categorySvc
       .createCategory({ name: this.newCategoryName.trim() })

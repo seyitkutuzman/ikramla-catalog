@@ -1,0 +1,43 @@
+/* src/app/components/blog-list/blog-list.component.scss */
+
+.blog-list {
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 -0.5rem;
+  }
+
+  .blog-card {
+    width: 300px;     // Genişliği artırdık
+    max-width: 100%;
+    margin: 0.5rem;
+
+    .card-img-top {
+      height: 120px;  // Yüksekliği azalttık
+      object-fit: cover;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      padding: 0.9rem;
+
+      .card-title {
+        font-size: 1.15rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .card-text {
+        font-size: 0.88rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .btn {
+        align-self: flex-start;
+        font-size: 0.83rem;
+        padding: 0.3rem 0.8rem;
+      }
+    }
+  }
+}

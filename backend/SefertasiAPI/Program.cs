@@ -140,23 +140,23 @@ else
 app.UseStaticFiles();
 
 // 9) Global CORS & response headers
-app.Use(async (context, next) =>
-{
-    context.Response.Headers["Access-Control-Allow-Origin"] = "*";
-    context.Response.Headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH";
-    context.Response.Headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization";
-    context.Response.Headers["Access-Control-Expose-Headers"] = "*";
-    context.Response.Headers["Access-Control-Max-Age"] = "86400";
+// app.Use(async (context, next) =>
+// {
+//     context.Response.Headers["Access-Control-Allow-Origin"] = "*";
+//     context.Response.Headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH";
+//     context.Response.Headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization";
+//     context.Response.Headers["Access-Control-Expose-Headers"] = "*";
+//     context.Response.Headers["Access-Control-Max-Age"] = "86400";
 
-    if (context.Request.Method == HttpMethods.Options)
-    {
-        context.Response.StatusCode = StatusCodes.Status200OK;
-        await context.Response.WriteAsync("OK");
-        return;
-    }
+//     if (context.Request.Method == HttpMethods.Options)
+//     {
+//         context.Response.StatusCode = StatusCodes.Status200OK;
+//         await context.Response.WriteAsync("OK");
+//         return;
+//     }
 
-    await next();
-});
+//     await next();
+// });
 
 app.UseRouting();
 app.UseCors("AllowAll");
